@@ -30,7 +30,7 @@
 
 * 下载[配置文件](https://github.com/CNMan/unbound.conf/archive/master.zip)，解压`unbound`目录中的文件到`C:\localdns\unbound\`，解压`dnscrypt-proxy`目录中的文件到`C:\localdns\dnscrypt-proxy\`
 
-![filelist](https://i.imgur.com/qtCiYry.png)
+![filelist](https://i.imgur.com/7YRXfyE.png)
 
 * 若无法完成以上步骤，可下载傻瓜包[localdns_32bit.zip](https://dl.cnlic.com/localdns_32bit.zip)或[localdns_64bit.zip](https://dl.cnlic.com/localdns_64bit.zip)，`必须`解压`localdns`目录到`C盘`根目录
 
