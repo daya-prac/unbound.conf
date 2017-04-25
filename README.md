@@ -23,7 +23,7 @@
 |               32位          |               64位          |             解压到          |
 |-----------------------------|-----------------------------|-----------------------------|
 |[dnscrypt-proxy-win32-full-1.9.4.zip](https://download.dnscrypt.org/dnscrypt-proxy/dnscrypt-proxy-win32-full-1.9.4.zip)|[dnscrypt-proxy-win64-full-1.9.4.zip](https://download.dnscrypt.org/dnscrypt-proxy/dnscrypt-proxy-win64-full-1.9.4.zip)|`C:\localdns\dnscrypt-proxy\`|
-|[unbound-1.6.1-w32.zip](http://unbound.net/downloads/unbound-1.6.1-w32.zip)|[unbound-1.6.1.zip](http://unbound.net/downloads/unbound-1.6.1.zip)|`C:\localdns\unbound\`|
+|[unbound-1.6.2-w32.zip](https://www.unbound.net/downloads/unbound-1.6.2-w32.zip)|[unbound-1.6.2.zip](https://www.unbound.net/downloads/unbound-1.6.2.zip)|`C:\localdns\unbound\`|
 |[nircmd.zip](http://www.nirsoft.net/utils/nircmd.zip)|[nircmd-x64.zip](http://www.nirsoft.net/utils/nircmd-x64.zip)|`C:\localdns\`|
 |[wget-1.11.4-x86.zip](http://nebm.ist.utl.pt/~glopes/wget/wget-1.11.4-x86.zip)|[wget-1.11.4-x64.zip](http://nebm.ist.utl.pt/~glopes/wget/wget-1.11.4-x64.zip)|`C:\localdns\`|
 |[BIND9.11.0-P5.x86.zip](https://ftp.isc.org/isc/bind9/cur/9.11/BIND9.11.0-P5.x86.zip)|[BIND9.11.0-P5.x64.zip](https://ftp.isc.org/isc/bind9/cur/9.11/BIND9.11.0-P5.x64.zip)|`C:\localdns\bind9\`|
@@ -111,31 +111,31 @@ Support for the XChaCha20-Poly1305 cipher: present
 
 Options:
 
-  -R    --resolver-name=...
-  -a    --local-address=...
-  -E    --ephemeral-keys
-  -K    --client-key=...
-  -L    --resolvers-list=...
-  -l    --logfile=...
-  -m    --loglevel=...
-  -X    --plugin=...
-  -N    --provider-name=...
-  -k    --provider-key=...
-  -r    --resolver-address=...
-  -n    --max-active-requests=...
-  -u    --user=...
-  -t    --test=...
-  -T    --tcp-only
-  -e    --edns-payload-size=...
-  -I    --ignore-timestamps
-  -V    --version
-  -h    --help
-        --install
-        --install-with-config-file=...
-        --reinstall
-        --reinstall-with-config-file=...
-        --uninstall
-        --service-name=...
+  -R	--resolver-name=...
+  -a	--local-address=...
+  -E	--ephemeral-keys
+  -K	--client-key=...
+  -L	--resolvers-list=...
+  -l	--logfile=...
+  -m	--loglevel=...
+  -X	--plugin=...
+  -N	--provider-name=...
+  -k	--provider-key=...
+  -r	--resolver-address=...
+  -n	--max-active-requests=...
+  -u	--user=...
+  -t	--test=...
+  -T	--tcp-only
+  -e	--edns-payload-size=...
+  -I	--ignore-timestamps
+  -V	--version
+  -h	--help
+    	--install
+    	--install-with-config-file=...
+    	--reinstall
+    	--reinstall-with-config-file=...
+    	--uninstall
+    	--service-name=...
 ```
 
 ## unbound 命令行参数
@@ -144,16 +144,16 @@ Options:
 usage:  unbound [options]
 	start unbound daemon DNS resolver.
 -h	this help
--c file	config file to read instead of C:\Program Files (x86)\Unbound\service.conf
+-c file	config file to read instead of C:\Program Files\Unbound\service.conf
 	file format is described in unbound.conf(5).
 -d	do not fork into the background.
 -v	verbose (more times to increase verbosity)
 -w opt	windows option: 
    	install, remove - manage the services entry
    	service - used to start from services control panel
-Version 1.6.1
+Version 1.6.2
 linked libs: event winsock (it uses WSAWaitForMultipleEvents), OpenSSL 1.0.2j  26 Sep 2016
-linked modules: dns64 validator iterator
+linked modules: dns64 respip validator iterator
 BSD licensed, see LICENSE in source package for details.
 Report bugs to unbound-bugs@nlnetlabs.nl
 ```
@@ -163,11 +163,11 @@ Report bugs to unbound-bugs@nlnetlabs.nl
 ```
 Usage:	unbound-checkconf [file]
 	Checks unbound configuration file for errors.
-file	if omitted C:\Program Files (x86)\Unbound\service.conf is used.
+file	if omitted C:\Program Files\Unbound\service.conf is used.
 -o option	print value of option to stdout.
 -f 		output full pathname with chroot applied, eg. with -o pidfile.
 -h		show this usage help.
-Version 1.6.1
+Version 1.6.2
 BSD licensed, see LICENSE in source package for details.
 Report bugs to unbound-bugs@nlnetlabs.nl
 ```
@@ -178,7 +178,7 @@ Report bugs to unbound-bugs@nlnetlabs.nl
 Usage:	unbound-control [options] command
 	Remote control utility for unbound server.
 Options:
-  -c file	config file, default is C:\Program Files (x86)\Unbound\service.conf
+  -c file	config file, default is C:\Program Files\Unbound\service.conf
   -s ip[@port]	server address, if omitted config is used.
   -q		quiet (don't print anything if it works ok).
   -h		show this usage help.
@@ -197,6 +197,9 @@ Commands:
   local_data <RR data...>	add local data, for example
 				local_data www.example.com A 192.0.2.1
   local_data_remove <name>	remove local RR data from name
+  local_zones, local_zones_remove, local_datas, local_datas_remove
+  				same, but read list from stdin
+  				(one entry per line).
   dump_cache			print cache to stdout
   load_cache			load cache from stdin
   lookup <name>			print nameservers for name
@@ -232,8 +235,15 @@ Commands:
 				or off to turn off root forwarding
 				or give list of ip addresses
   ratelimit_list [+a]		list ratelimited domains
+  ip_ratelimit_list [+a]	list ratelimited ip addresses
 		+a		list all, also not ratelimited
-Version 1.6.1
+  view_list_local_zones	view	list local-zones in view
+  view_list_local_data	view	list local-data RRs in view
+  view_local_zone view name type  	add local-zone in view
+  view_local_zone_remove view name  	remove local-zone in view
+  view_local_data view RR...		add local-data in view
+  view_local_data_remove view name  	remove local-data in view
+Version 1.6.2
 BSD licensed, see LICENSE in source package for details.
 Report bugs to unbound-bugs@nlnetlabs.nl
 ```
